@@ -325,4 +325,185 @@
     <div class="container">
         <!-- Seite 1: Frage -->
         <div id="questionSection">
-            <div c
+            <div class="rose-header">🌹</div>
+            <h1>Liebe Hedyen</h1>
+            <div class="subtitle">Für die wunderbarste Person ✨</div>
+            
+            <div class="bouquet">
+                <span>🌹</span>
+                <span>🌺</span>
+                <span>🌸</span>
+                <span>🌷</span>
+                <span>💐</span>
+            </div>
+
+            <div class="question">
+                <p>Willst du mit mir zusammen sein?</p>
+            </div>
+
+            <div class="buttons">
+                <button id="yesBtn" onclick="sayYes()">Ja! 💕</button>
+                <button id="noBtn" onclick="moveButton()">Nein</button>
+            </div>
+        </div>
+
+        <!-- Seite 2: Ja-Antwort -->
+        <div id="successSection" class="success-message">
+            <div class="emoji-garden">✨💖✨</div>
+            <h2>Endlich ist die Wartezeit vorbei </h2>
+            
+            <div class="bouquet">
+                <span>🌹</span>
+                <span>🌹</span>
+                <span>🌹</span>
+                <span>🌹</span>
+                <span>🌹</span>
+            </div>
+
+            <p>Du hast mich zum glücklichsten Menschen auf der Welt gemacht! 🥰</p>
+            
+            <div class="love-note">
+                "Wie eine Rose unter Blumen, so bist du in meinem Leben – etwas ganz Besonderes! 🌹"
+            </div>
+
+            <p style="margin-top: 25px;">Ich freue mich so sehr auf unsere gemeinsame Zukunft!🍀</p>
+            
+            <div style="margin-top: 30px; font-size: 3em;">🌸🌸🌸</div>
+
+            <div class="buttons">
+                <button id="nextBtn" onclick="showCompliments()">Still interested? 😊</button>
+            </div>
+        </div>
+
+        <!-- Seite 3: Was ich an dir mag -->
+        <div id="complimentsSection" class="success-message">
+            <div class="rose-header">💖</div>
+            <h2>Was ich an dir mag...</h2>
+            
+            <div class="compliment-text" id="complimentText">
+                🌹✨💕
+            </div>
+
+            <div class="buttons">
+                <button id="pushBtn" onclick="showNextCompliment()" style="display: none;">Süße 💕</button>
+            </div>
+        </div>
+
+        <!-- Seite 4: To be continued -->
+        <div id="finalSection" class="success-message">
+            <div class="big-emoji">⏳🐼🪷</div>
+            <h2>To be continued...</h2>
+            <p style="font-size: 1.3em; margin-top: 30px;">✨💕✨</p>
+        </div>
+    </div>
+
+    <script>
+        var compliments = [
+            "Wie wunderschön du bist 🌹",
+            "Wie süß dein Lächeln ist 😊",
+            "Wie schüchtern du am Anfang bist, dann geht es los und du bist wie ein Radio 📻",
+            "Ich freue mich immer zuzuhören 💕",
+            "Ich mag es, wie du auf die kleinsten Details achtest 🔍",
+            "Ich mag es, dass du noch so viel Energie hast und die Beziehung jung hältst ⚡",
+            "Wie du schon alles geplant hast 📝",
+            "Wie du für uns beide träumst 💭✨"
+        ];
+        
+        var currentComplimentIndex = 0;
+
+        function sayYes() {
+            document.getElementById('questionSection').style.display = 'none';
+            document.getElementById('successSection').style.display = 'block';
+            
+            // Rosenblätter fallen lassen
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => createPetal(), i * 80);
+            }
+            
+            // Hintergrund ändert sich
+            document.body.style.background = 'linear-gradient(135deg, #ffeef0 0%, #ffc3ce 50%, #ff9aaf 100%)';
+        }
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const flowers = ['🌹', '🌸', '🌺', '🌷', '💐', '🏵️', '💕'];
+            petal.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            petal.style.animationDelay = Math.random() * 2 + 's';
+            petal.style.fontSize = (Math.random() * 25 + 25) + 'px';
+            document.getElementById('petalsContainer').appendChild(petal);
+            
+            setTimeout(() => petal.remove(), 8000);
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const container = document.querySelector('.container');
+            
+            // Button bewegt sich weg
+            const maxX = container.offsetWidth - btn.offsetWidth - 100;
+            const maxY = container.offsetHeight - btn.offsetHeight - 100;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            btn.style.position = 'absolute';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+            
+            // Button wird kleiner
+            const currentSize = parseFloat(window.getComputedStyle(btn).fontSize);
+            btn.style.fontSize = Math.max(currentSize * 0.85, 10) + 'px';
+            btn.style.padding = '12px 25px';
+            
+            // Ja-Button wird größer und attraktiver
+            const yesBtn = document.getElementById('yesBtn');
+            const yesSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (yesSize * 1.12) + 'px';
+            yesBtn.style.transform = 'scale(' + (1 + Math.random() * 0.1) + ')';
+        }
+
+        function showCompliments() {
+            document.getElementById('successSection').style.display = 'none';
+            document.getElementById('complimentsSection').style.display = 'block';
+            
+            // Button nach 20 Sekunden zeigen
+            setTimeout(function() {
+                document.getElementById('pushBtn').style.display = 'inline-block';
+            }, 20000);
+        }
+
+        function showNextCompliment() {
+            if (currentComplimentIndex < compliments.length) {
+                document.getElementById('complimentText').innerHTML = compliments[currentComplimentIndex];
+                currentComplimentIndex++;
+                
+                // Wenn alle Komplimente gezeigt wurden
+                if (currentComplimentIndex >= compliments.length) {
+                    // Button verstecken
+                    document.getElementById('pushBtn').style.display = 'none';
+                    
+                    // Nach 20 Sekunden "To be continued" Button zeigen
+                    setTimeout(function() {
+                        document.getElementById('pushBtn').innerHTML = 'To be continued... ✨';
+                        document.getElementById('pushBtn').style.display = 'inline-block';
+                        document.getElementById('pushBtn').onclick = function() {
+                            document.getElementById('complimentsSection').style.display = 'none';
+                            document.getElementById('finalSection').style.display = 'block';
+                        };
+                    }, 20000);
+                }
+            }
+        }
+
+        // Einige Blütenblätter fallen beim Laden
+        window.addEventListener('load', () => {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => createPetal(), i * 300);
+            }
+        });
+    </script>
+</body>
+</html>
