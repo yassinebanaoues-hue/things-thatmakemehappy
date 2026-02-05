@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Für Hedyen 🌹</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animierte Blumen im Hintergrund */
+        .floating-flowers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flower {
+            position: absolute;
+            animation: floatFlower 15s infinite ease-in-out;
+            opacity: 0.3;
+            font-size: 40px;
+        }
+
+        @keyframes floatFlower {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(90deg);
+            }
+            50% {
+                transform: translateY(0) rotate(180deg);
+            }
+            75% {
+                transform: translateY(-30px) rotate(270deg);
+            }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+            max-width: 550px;
+            animation: fadeIn 1.5s ease-in;
+            position: relative;
+            z-index: 10;
+            border: 3px solid rgba(255, 182, 193, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .rose-header {
+            font-size: 5em;
+            margin-bottom: 10px;
+            animation: roseBloom 3s infinite;
+        }
+
+        @keyframes roseBloom {
+            0%, 100% {
+                transform: scale(1) rotate(-5deg);
+            }
+            50% {
+                transform: scale(1.15) rotate(5deg);
+            }
+        }
+
+        h1 {
+            color: #c94d5c;
+            margin-bottom: 15px;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        h2 {
+            color: #c94d5c;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        .subtitle {
+            color: #d4737e;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .question {
+            font-size: 1.6em;
+            color: #333;
+            margin: 30px 0;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .compliment-text {
+            font-size: 1.5em;
+            color: #333;
+            margin: 40px 0;
+            line-height: 1.8;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        button {
+            padding: 18px 45px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+        }
+
+        #yesBtn, #nextBtn, #pushBtn {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c94d5c 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(201, 77, 92, 0.3);
+        }
+
+        #yesBtn:hover, #nextBtn:hover, #pushBtn:hover {
+            transform: scale(1.15) rotate(2deg);
+            box-shadow: 0 12px 35px rgba(201, 77, 92, 0.5);
+        }
+
+        #noBtn {
+            background: #e8e8e8;
+            color: #999;
+            position: relative;
+        }
+
+        #noBtn:hover {
+            background: #d8d8d8;
+        }
+
+        .petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .petal {
+            position: absolute;
+            animation: fall 6s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .success-message {
+            display: none;
+            animation: celebrateIn 1s ease-out;
+        }
+
+        @keyframes celebrateIn {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.1) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .success-message h2 {
+            color: #c94d5c;
+            font-size: 3.5em;
+            margin: 20px 0;
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        .success-message p {
+            font-size: 1.4em;
+            color: #555;
+            line-height: 2;
+            margin: 15px 0;
+        }
+
+        .emoji-garden {
+            font-size: 5em;
+            animation: grow 2s infinite;
+            margin: 20px 0;
+        }
+
+        @keyframes grow {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .big-emoji {
+            font-size: 8em;
+            margin: 30px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px); 
+            }
+            50% { 
+                transform: translateY(-20px); 
+            }
+        }
+
+        .bouquet {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        .bouquet span {
+            display: inline-block;
+            animation: wave 1.5s ease-in-out infinite;
+        }
+
+        .bouquet span:nth-child(1) { animation-delay: 0s; }
+        .bouquet span:nth-child(2) { animation-delay: 0.2s; }
+        .bouquet span:nth-child(3) { animation-delay: 0.4s; }
+        .bouquet span:nth-child(4) { animation-delay: 0.6s; }
+        .bouquet span:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: rotate(0deg) translateY(0);
+            }
+            25% {
+                transform: rotate(10deg) translateY(-10px);
+            }
+            75% {
+                transform: rotate(-10deg) translateY(-5px);
+            }
+        }
+
+        .love-note {
+            background: linear-gradient(135deg, #fff5f7, #ffe8ec);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            border-left: 5px solid #ff6b9d;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hintergrund Blumen -->
+    <div class="floating-flowers">
+        <div class="flower" style="left: 10%; top: 20%; animation-delay: 0s;">🌸</div>
+        <div class="flower" style="left: 80%; top: 30%; animation-delay: 2s;">🌺</div>
+        <div class="flower" style="left: 15%; top: 70%; animation-delay: 4s;">🌼</div>
+        <div class="flower" style="left: 85%; top: 60%; animation-delay: 6s;">🌻</div>
+        <div class="flower" style="left: 45%; top: 15%; animation-delay: 3s;">🌷</div>
+        <div class="flower" style="left: 60%; top: 80%; animation-delay: 5s;">🏵️</div>
+    </div>
+
+    <div class="petals" id="petalsContainer"></div>
+    
+    <div class="container">
+        <!-- Seite 1: Frage -->
+        <div id="questionSection">
+            <div class="rose-header">🌹</div>
+            <h1>Liebe Hedyen</h1>
+            <div class="subtitle">Für die wunderbarste Person ✨</div>
+            
+            <div class="bouquet">
+                <span>🌹</span>
+                <span>🌺</span>
+                <span>🌸</span>
+                <span>🌷</span>
+                <span>💐</span>
+            </div>
+
+            <div class="question">
+                <p>Willst du mit mir zusammen sein?</p>
+            </div>
+
+            <div class="buttons">
+                <button id="yesBtn" onclick="sayYes()">Ja! 💕</button>
+                <button id="noBtn" onclick="moveButton()">Nein</button>
+            </div>
+        </div>
+
+        <!-- Seite 2: Ja-Antwort -->
+        <div id="successSection" class="success-message">
+            <div class="emoji-garden">✨💖✨</div>
+            <h2>Endlich ist die Wartezeit vorbei </h2>
+            
+            <div class="bouquet">
+                <span>🌹</span>
+                <span>🌹</span>
+                <span>🌹</span>
+                <span>🌹</span>
+                <span>🌹</span>
+            </div>
+
+            <p>Du hast mich zum glücklichsten Menschen auf der Welt gemacht! 🥰</p>
+            
+            <div class="love-note">
+                "Wie eine Rose unter Blumen, so bist du in meinem Leben – etwas ganz Besonderes! 🌹"
+            </div>
+
+            <p style="margin-top: 25px;">Ich freue mich so sehr auf unsere gemeinsame Zukunft!🍀</p>
+            
+            <div style="margin-top: 30px; font-size: 3em;">🌸🌸🌸</div>
+
+            <div class="buttons">
+                <button id="nextBtn" onclick="showCompliments()">Still interested? 😊</button>
+            </div>
+        </div>
+
+        <!-- Seite 3: Was ich an dir mag -->
+        <div id="complimentsSection" class="success-message">
+            <div class="rose-header">💖</div>
+            <h2>Was ich an dir mag...</h2>
+            
+            <div class="compliment-text" id="complimentText">
+                Klick auf Push! ↓
+            </div>
+
+            <div class="buttons">
+                <button id="pushBtn" onclick="showNextCompliment()">Push! 💕</button>
+            </div>
+        </div>
+
+        <!-- Seite 4: To be continued -->
+        <div id="finalSection" class="success-message">
+            <div class="big-emoji">⏳🐼🪷</div>
+            <h2>To be continued...</h2>
+            <p style="font-size: 1.3em; margin-top: 30px;">✨💕✨</p>
+        </div>
+    </div>
+
+    <script>
+        var compliments = [
+            "Wie wunderschön du bist 🌹",
+            "Wie süß dein Lächeln ist 😊",
+            "Wie schüchtern du am Anfang bist, dann geht es los und du bist wie ein Radio 📻",
+            "Ich freue mich immer zuzuhören 💕",
+            "Ich mag es, wie du auf die kleinsten Details achtest 🔍",
+            "Ich mag es, dass du noch so viel Energie hast und die Beziehung jung hältst ⚡",
+            "Wie du schon alles geplant hast 📝",
+            "Wie du für uns beide träumst 💭✨"
+        ];
+        
+        var currentComplimentIndex = 0;
+
+        function sayYes() {
+            document.getElementById('questionSection').style.display = 'none';
+            document.getElementById('successSection').style.display = 'block';
+            
+            // Rosenblätter fallen lassen
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => createPetal(), i * 80);
+            }
+            
+            // Hintergrund ändert sich
+            document.body.style.background = 'linear-gradient(135deg, #ffeef0 0%, #ffc3ce 50%, #ff9aaf 100%)';
+        }
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const flowers = ['🌹', '🌸', '🌺', '🌷', '💐', '🏵️', '💕'];
+            petal.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            petal.style.animationDelay = Math.random() * 2 + 's';
+            petal.style.fontSize = (Math.random() * 25 + 25) + 'px';
+            document.getElementById('petalsContainer').appendChild(petal);
+            
+            setTimeout(() => petal.remove(), 8000);
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const container = document.querySelector('.container');
+            
+            // Button bewegt sich weg
+            const maxX = container.offsetWidth - btn.offsetWidth - 100;
+            const maxY = container.offsetHeight - btn.offsetHeight - 100;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            btn.style.position = 'absolute';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+            
+            // Button wird kleiner
+            const currentSize = parseFloat(window.getComputedStyle(btn).fontSize);
+            btn.style.fontSize = Math.max(currentSize * 0.85, 10) + 'px';
+            btn.style.padding = '12px 25px';
+            
+            // Ja-Button wird größer und attraktiver
+            const yesBtn = document.getElementById('yesBtn');
+            const yesSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (yesSize * 1.12) + 'px';
+            yesBtn.style.transform = 'scale(' + (1 + Math.random() * 0.1) + ')';
+        }
+
+        function showCompliments() {
+            document.getElementById('successSection').style.display = 'none';
+            document.getElementById('complimentsSection').style.display = 'block';
+        }
+
+        function showNextCompliment() {
+            if (currentComplimentIndex < compliments.length) {
+                document.getElementById('complimentText').innerHTML = compliments[currentComplimentIndex];
+                currentComplimentIndex++;
+                
+                // Wenn alle Komplimente gezeigt wurden
+                if (currentComplimentIndex >= compliments.length) {
+                    document.getElementById('pushBtn').innerHTML = 'To be continued... ✨';
+                    document.getElementById('pushBtn').onclick = function() {
+                        document.getElementById('complimentsSection').style.display = 'none';
+                        document.getElementById('finalSection').style.display = 'block';
+                    };
+                }
+            }
+        }
+
+        // Einige Blütenblätter fallen beim Laden
+        window.addEventListener('load', () => {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => createPetal(), i * 300);
+            }
+        });
+    </script>
+</body>
+</html>
