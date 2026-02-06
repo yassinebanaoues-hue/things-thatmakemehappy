@@ -485,7 +485,7 @@
                     // Button verstecken
                     document.getElementById('pushBtn').style.display = 'none';
                     
-                    // Nach 20 Sekunden "To be continued" Button zeigen
+                    // Nach 5 Sekunden "To be continued" Button zeigen
                     setTimeout(function() {
                         document.getElementById('pushBtn').innerHTML = 'To be continued... ✨';
                         document.getElementById('pushBtn').style.display = 'inline-block';
@@ -493,7 +493,7 @@
                             document.getElementById('complimentsSection').style.display = 'none';
                             document.getElementById('finalSection').style.display = 'block';
                         };
-                    }, 20000);
+                    }, 5000);
                 }
             }
         }
